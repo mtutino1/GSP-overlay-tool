@@ -99,6 +99,8 @@
     var btn = 'background:none;border:0;color:#fff;cursor:pointer;font:bold 14px/1 sans-serif;padding:0 3px;';
     var row = 'display:block;margin:5px 0;cursor:pointer;';
     var tlBtn = 'flex:1;padding:3px 0;cursor:pointer;font:12px/1 sans-serif;';
+    var PLAY = '▶︎'; // ︎ = draw as plain text, not an emoji, so it takes the button's dark color
+    var PAUSE = '❚❚';
     var look = 'background:rgba(0,0,0,0.85);color:#fff;font:11px/1.3 monospace;' +
         'padding:4px 6px;box-sizing:border-box;text-align:left;';
 
@@ -135,7 +137,7 @@
                     <input data-el="scrub" type="range" min="0" max="0" step="0.01" value="0" style="width:100%;">
                     <div style="display:flex;gap:4px;">
                         <button data-el="back" title="Back ${STEP}s" style="${tlBtn}">⏪</button>
-                        <button data-el="play" title="Play / pause" style="${tlBtn}">▶</button>
+                        <button data-el="play" title="Play / pause" style="${tlBtn}color:#000;font-weight:bold;">${PLAY}</button>
                         <button data-el="fwd" title="Forward ${STEP}s" style="${tlBtn}">⏩</button>
                     </div>
                     <label style="${row}"><input data-el="helpers" type="checkbox" checked> Layout helpers</label>
@@ -284,7 +286,7 @@
         var d = tl.duration();
         var t = tl.time();
         var scrub = get('scrub');
-        var label = (tl.paused() || isDone()) ? '▶' : '❚❚';
+        var label = (tl.paused() || isDone()) ? PLAY : PAUSE;
         var time = t.toFixed(2) + ' / ' + d.toFixed(2) + 's';
         if (scrub.max != d) scrub.max = d;
         if (scrub.value != t) scrub.value = t;
